@@ -41,6 +41,7 @@ yarn add 'pinia@^2.x.x'
 ```ts
 function takeAnyStore(store: Store) {} // [!code --]
 function takeAnyStore(store: StoreGeneric) {} // [!code ++]
+
 function takeAnyStore(store: GenericStore) {} // [!code --]
 function takeAnyStore(store: StoreGeneric) {} // [!code ++]
 ```
@@ -67,6 +68,7 @@ declare module 'pinia' {
 ```ts
 import { PiniaStorePlugin } from 'pinia' // [!code --]
 import { PiniaPlugin } from 'pinia' // [!code ++]
+
 const piniaPlugin: PiniaStorePlugin = () => { // [!code --]
 const piniaPlugin: PiniaPlugin = () => { // [!code ++]
   // ...

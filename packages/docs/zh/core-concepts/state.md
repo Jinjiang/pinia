@@ -2,7 +2,7 @@
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-state-from-a-pinia-store"
-  title="Learn all about state in Pinia"
+  title="学习 Pinia 中有关 state 的一切"
 />
 
 在大多数情况下，state 都是你的 store 的核心。人们通常会先定义能代表他们 APP 的 state。在 Pinia 中，state 被定义为一个返回初始状态的函数。这使得 Pinia 可以同时支持服务端和客户端。
@@ -83,9 +83,13 @@ const store = useStore()
 store.count++
 ```
 
+<!-- TODO: translation -->
+
+Note you cannot add a new state property **if you don't define it in `state()`**, it must contain the initial state. e.g.: we can't do `store.secondCount = 2` if `secondCount` is not defined in `state()`.
+
 ## 重置 state %{#resetting-the-state}%
 
-使用[选项式 API](/zh/core-concepts/index.md#option-stores) 时，你可以通过调用 store 的 `$reset()` 方法将 state 重置为初始值。
+使用[选项式 API](/zh/core-concepts/index.md#option-stores) 时，你可以通过调用 store 的 `$reset()` 方法将 state *重置*为初始值。
 
 ```js
 const store = useStore()
@@ -113,7 +117,7 @@ export const useCounterStore = defineStore('counter', () => {
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-pinia-state-in-the-options-api"
-  title="Access Pinia State via the Options API"
+  title="通过选项式 API 访问 Pinia state"
 />
 
 在下面的例子中，你可以假设相关 store 已经创建了：
@@ -220,7 +224,7 @@ store.$state = { count: 24 }
 store.$patch({ count: 24 })
 ```
 
-你也可以通过变更 `pinia` 实例的 `state` 来设置整个应用的初始 state。这常用于 [SSR 中的激活过程](../ssr/#state-hydration)。
+你也可以通过变更 `pinia` 实例的 `state` 来**设置整个应用的初始 state**。这常用于 [SSR 中的激活过程](../ssr/#state-hydration)。
 
 ```js
 pinia.state.value = {}

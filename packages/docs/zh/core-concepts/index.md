@@ -3,6 +3,7 @@
 <VueSchoolLink
   href="https://vueschool.io/lessons/define-your-first-pinia-store"
   title="Learn how to define and use stores in Pinia"
+  title="学习在 Pinia 中如何定义和使用 store"
 />
 
 在深入研究核心概念之前，我们得知道 Store 是用 `defineStore()` 定义的，它的第一个参数要求是一个**独一无二的**名字：
@@ -64,9 +65,36 @@ export const useCounterStore = defineStore('counter', () => {
 - `computed()` 就是 `getters`
 - `function()` 就是 `actions`
 
+<!-- TODO: translation -->
+
+Note you **must** return **all state properties** in setup stores for pinia to pick them up as state. In other words, you cannot have _private_ state properties in stores. Not returning all state properties can break SSR, devtools, and other plugins.
+
 Setup store 比 [Option Store](#option-stores) 带来了更多的灵活性，因为你可以在一个 store 内创建侦听器，并自由地使用任何[组合式函数](https://cn.vuejs.org/guide/reusability/composables.html#composables)。不过，请记住，使用组合式函数会让 [SSR](../cookbook/composables.md) 变得更加复杂。
 
-## 你应该选用哪种语法？ %{#what-syntax-should-i-pick}%
+Setup stores are also able to rely on globally _provided_ properties like the Router or the Route. Any property [provided at the App level](https://vuejs.org/api/application.html#app-provide) can be accessed from the store using `inject()`, just like in components:
+
+```ts
+import { inject } from 'vue'
+import { useRoute } from 'vue-router'
+
+export const useSearchFilters = defineStore('search-filters', () => {
+  const route = useRoute()
+  // this assumes `app.provide('appProvided', 'value')` was called
+  const appProvided = inject('appProvided')
+
+  // ...
+
+  return {
+    // ...
+  }
+})
+```
+
+:::warning
+Do not return properties like `route` or `appProvided` (from the example above) as they do not belong to the store itself and you can directly access them within components with `useRoute()` and `inject('appProvided')`.
+:::
+
+## 你应该选用哪种语法？%{#what-syntax-should-i-pick}%
 
 和[在 Vue 中如何选择组合式 API 与选项式 API](https://cn.vuejs.org/guide/introduction.html#which-to-choose) 一样，选择你觉得最舒服的那一个就好。如果你还不确定，可以先试试 [Option Store](#option-stores)。
 
@@ -81,6 +109,12 @@ import { useCounterStore } from '@/stores/counter'
 const store = useCounterStore()
 </script>
 ```
+
+<!-- TODO: translation -->
+
+:::tip
+If you are not using `setup` components yet, [you can still use Pinia with _map helpers_](../cookbook/options-api.md).
+:::
 
 你可以定义任意多的 store，但为了让使用 pinia 的益处最大化(比如允许构建工具自动进行代码分割以及 TypeScript 推断)，**你应该在不同的文件中去定义 store**。
 
@@ -98,20 +132,27 @@ const store = useCounterStore()
 const { name, doubleCount } = store // [!code warning]
 name // 将始终是 "Eduardo" // [!code warning]
 doubleCount // 将始终是 0 // [!code warning]
+
 setTimeout(() => {
   store.increment()
 }, 1000)
+
 // ✅ 这样写是响应式的
 // 💡 当然你也可以直接使用 `store.doubleCount`
 const doubleValue = computed(() => store.doubleCount)
 </script>
 ```
 
+<!-- TODO: translation -->
+
+## Destructuring from a Store %{#destructuring-from-a-store}%
+
 为了从 store 中提取属性时保持其响应性，你需要使用 `storeToRefs()`。它将为每一个响应式属性创建引用。当你只使用 store 的状态而不调用任何 action 时，它会非常有用。请注意，你可以直接从 store 中解构 action，因为它们也被绑定到 store 上：
 
 ```vue
 <script setup>
 import { storeToRefs } from 'pinia'
+
 const store = useCounterStore()
 // `name` 和 `doubleCount` 是响应式的 ref
 // 同时通过插件添加的属性也会被提取为 ref

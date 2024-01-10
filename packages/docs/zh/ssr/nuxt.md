@@ -35,7 +35,32 @@ export default defineNuxtConfig({
 
 这样配置就完成了，正常使用 store 就好啦!
 
-## 在 `setup()` 外部使用 store %{#using-the-store-outside-of-setup}%
+<!-- TODO: translation -->
+
+## Awaiting for actions in pages %{#awaiting-for-actions-in-pages}%
+
+与 `onServerPrefetch()` 一样，如果你想在 `asyncData()` 中调用一个存储动作，你不需要做任何特别的事情。
+
+As with `onServerPrefetch()`, you can call a store action within `asyncData()`. Given how `useAsyncData()` works, **make sure to return a value**. This will allow Nuxt to skip running the action on the client side and reuse the value from the server.
+
+```vue{3-4}
+<script setup>
+const store = useStore()
+// we could also extract the data, but it's already present in the store
+await useAsyncData('user', () => store.fetchUser())
+</script>
+```
+
+If your action doesn't resolve a value, you can add any non nullish value:
+
+```vue{3}
+<script setup>
+const store = useStore()
+await useAsyncData('user', () => store.fetchUser().then(() => true))
+</script>
+```
+
+::: tip
 
 如果你想在 `setup()` 外部使用一个 store，记得把 `pinia` 对象传给 `useStore()`。我们会把它添加到[上下文](https://nuxtjs.org/docs/2.x/internals-glossary/context)中，然后你就可以在 `asyncData()` 和 `fetch()` 中访问它了：
 
@@ -49,39 +74,31 @@ export default {
 }
 ```
 
-与 `onServerPrefetch()` 一样，如果你想在 `asyncData()` 中调用一个存储动作，你不需要做任何特别的事情。
-
-```vue
-<script setup>
-const store = useStore()
-const { data } = await useAsyncData('user', () => store.fetchUser())
-</script>
-```
+:::
 
 ## 自动引入 %{#auto-imports}%
 
-默认情况下，`@pinia/nuxt` 会暴露一个自动引入的方法：`usePinia()`，它类似于 `getActivePinia()`，但在 Nuxt 中效果更好。你可以添加自动引入来减轻你的开发工作：
+默认情况下，`@pinia/nuxt` 会暴露几个自动引入的方法：
+
+- `usePinia()`，它类似于 `getActivePinia()`，但在 Nuxt 中效果更好。你可以添加自动引入来减轻你的开发工作：
+- `defineStore()` to define stores
+- `storeToRefs()` when you need to extract individual refs from a store
+- `acceptHMRUpdate()` for [hot module replacement](../cookbook/hot-module-replacement.md)
+
+It also automatically imports **all stores** defined within your `stores` folder. It doesn't lookup for nested stores though. You can customize this behavior by setting the `storesDirs` option:
 
 ```js
-// nuxt.config.js
+// nuxt.config.ts
 export default defineNuxtConfig({
-  // ... 其他配置
-  modules: [
-    // ...
-    [
-      '@pinia/nuxt',
-      {
-        autoImports: [
-          // 自动引入 `defineStore()`
-          'defineStore',
-          // 自动引入 `defineStore()` 并重命名为 `definePiniaStore()`
-          ['defineStore', 'definePiniaStore'],
-        ],
-      },
-    ],
-  ],
+  // ... other options
+  modules: ['@pinia/nuxt'],
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
 })
 ```
+
+Note the folders are relative to the root of your project. If you change the `srcDir` option, you need to adapt the paths accordingly.
 
 ## 纯 Nuxt 2 %{#nuxt-2-without-bridge}%
 

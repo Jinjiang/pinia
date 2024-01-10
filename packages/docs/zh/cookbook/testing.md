@@ -8,17 +8,6 @@
 
 根据测试的内容和方式，我们需要以不同的方式来处理这三个问题：
 
-- [store 测试](#testing-stores)
-  - [对 store 单元测试](#unit-testing-a-store)
-  - [对组件单元测试](#unit-testing-components)
-    - [初始 state](#initial-state)
-    - [自定义 action 的行为](#customizing-behavior-of-actions)
-    - [指定 createSpy 函数](#specifying-the-creespy-function)
-    - [Mocking getters](#mocking-getters)
-    - [Pinia 插件](#pinia-plugins)
-  - [端到端测试](#e2e-tests)
-  - [对组件单元测试(Vue 2)](#unit-test-components-vue-2)
-
 ## 对 store 进行单元测试 %{#unit-testing-a-store}%
 
 要对一个 store 进行单元测试，最重要的是创建一个 `pinia` 实例：
@@ -170,13 +159,26 @@ expect(store.someAction).toHaveBeenCalledTimes(1)
 
 当使用 Jest，或 vitest 且设置 `globals: true` 时，`createTestingPinia` 会自动使用现有测试框架 (`jest.fn` 或 `vitest.fn`) 的 spy 函数存根 (stub) action。如果你使用的是不同的框架，你需要提供一个 [createSpy](/zh/api/interfaces/pinia_testing.TestingOptions.html#createspy) 选项：
 
-```js
+::: code-group
+
+```ts [vitest]
+// 备注：无需配置 `globals: true`
+import { vi } from 'vitest'
+
+createTestingPinia({
+  createSpy: vi.fn,
+})
+```
+
+```ts [sinon]
 import sinon from 'sinon'
 
 createTestingPinia({
-  createSpy: sinon.spy, // 使用 sinon's spy 包装 action
+  createSpy: sinon.spy,
 })
 ```
+
+:::
 
 你可以在[测试包的测试源码](https://github.com/vuejs/pinia/blob/v2/packages/testing/src/testing.spec.ts)中找到更多的例子。
 
@@ -231,7 +233,7 @@ const wrapper = mount(Counter, {
 
 对于 pinia，你不需要为端到端测试修改任何代码，这就是端到端测试的含义！也许你想测试 HTTP 请求，但这已经超出了本指南的范围😄。
 
-## 对组件单元测试(Vue 2) %{#unit-test-components-vue-2}%
+## 对组件单元测试 (Vue 2) %{#unit-test-components-vue-2}%
 
 当你使用的是 [Vue Test Utils 1](https://v1.test-utils.vuejs.org/zh/) 时，请将 Pinia 安装在 `localVue` 上：
 

@@ -57,6 +57,12 @@ export const useVideoPlayer = defineStore('video', () => {
 })
 ```
 
+<!-- TODO: translation -->
+
+:::warning
+Differently from regular state, `ref<HTMLVideoElement>()` contains a non-serializable reference to the DOM element. This is why we don't return it directly. Since it's client-only state, we know it won't be set on the server and will **always** start as `undefined` on the client.
+:::
+
 ## 服务端渲染 %{#ssr}%
 
 当处理[服务端渲染](../ssr/index.md)时，你有一些需要额外注意的内容，以便在 store 中使用组合式函数。

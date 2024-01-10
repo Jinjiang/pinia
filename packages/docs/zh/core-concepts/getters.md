@@ -2,7 +2,7 @@
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/getters-in-pinia"
-  title="Learn all about getters in Pinia"
+  title="学习 Pinia 中有关 getter 的一切"
 />
 
 Getter 完全等同于 store 的 state 的[计算值](https://cn.vuejs.org/guide/essentials/computed.html)。可以通过 `defineStore()` 中的 `getters` 属性来定义它们。**推荐**使用箭头函数，并且它将接收 `state` 作为第一个参数：
@@ -44,8 +44,10 @@ export const useStore = defineStore('main', {
 ```vue
 <script setup>
 import { useCounterStore } from './counterStore'
+
 const store = useCounterStore()
 </script>
+
 <template>
   <p>Double count is {{ store.doubleCount }}</p>
 </template>
@@ -80,7 +82,7 @@ export const useStore = defineStore('main', {
 
 ## 向 getter 传递参数 %{#passing-arguments-to-getters}%
 
-*Getter* 只是幕后的**计算**属性，所以不可以向它们传递任何参数。不过，你可以从 *getter* 返回一个函数，该函数可以接受任意参数：
+*Getter* 只是幕后的*计算*属性，所以不可以向它们传递任何参数。不过，你可以从 *getter* 返回一个函数，该函数可以接受任意参数：
 
 ```js
 export const useStore = defineStore('main', {
@@ -157,7 +159,7 @@ store.doubleCount // 6
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-pinia-getters-in-the-options-api"
-  title="Access Pinia Getters via the Options API"
+  title="通过选项式 API 访问 Pinia getter"
 />
 
 在下面的例子中，你可以假设相关的 store 已经创建了：

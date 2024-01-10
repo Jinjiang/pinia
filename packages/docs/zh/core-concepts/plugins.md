@@ -160,6 +160,36 @@ pinia.use(({ store }) => {
 
 :::
 
+<!-- TODO: translation -->
+
+#### Resetting state added in plugins %{#resetting-state-added-in-plugins}%
+
+By default, `$reset()` will not reset state added by plugins but you can override it to also reset the state you add:
+
+```js
+import { toRef, ref } from 'vue'
+
+pinia.use(({ store }) => {
+  // this is the same code as above for reference
+  if (!Object.prototype.hasOwnProperty(store.$state, 'hasError')) {
+    const hasError = ref(false)
+    store.$state.hasError = hasError
+  }
+  store.hasError = toRef(store.$state, 'hasError')
+
+ // make sure to set the context (`this`) to the store
+  const originalReset = store.$reset.bind(store)
+
+ // override the $reset function
+  return {
+    $reset() {
+      originalReset()
+      store.hasError = false
+    }
+  }
+})
+```
+
 ## 添加新的外部属性 %{#adding-new-external-properties}%
 
 当添加外部属性、第三方库的类实例或非响应式的简单值时，你应该先用 `markRaw()` 来包装一下它，再将它传给 pinia。下面是一个在每个 store 中添加路由器的例子：
@@ -247,7 +277,7 @@ defineStore(
 )
 ```
 
-## TypeScript
+## TypeScript %{#typescript}%
 
 上述一切功能都有类型支持，所以你永远不需要使用 `any` 或 `@ts-ignore`。
 
@@ -269,6 +299,7 @@ export function myPiniaPlugin(context: PiniaPluginContext) {
 
 ```ts
 import 'pinia'
+import type { Router } from 'vue-router'
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
@@ -391,3 +422,31 @@ export default myPlugin
 ```
 
 注意上面的例子使用的是 TypeScript。如果你使用的是 `.js` 文件，你必须删除类型标注 `PiniaPluginContext` 和 `Plugin` 以及它们的导入语句。
+
+<!-- TODO: translation -->
+
+### Nuxt.js 2 %{#nuxt-2}%
+
+If you are using Nuxt.js 2, the types are slightly different:
+
+```ts
+// plugins/myPiniaPlugin.ts
+import { PiniaPluginContext } from 'pinia'
+import { Plugin } from '@nuxt/types'
+
+function MyPiniaPlugin({ store }: PiniaPluginContext) {
+  store.$subscribe((mutation) => {
+    // react to store changes
+    console.log(`[🍍 ${mutation.storeId}]: ${mutation.type}.`)
+  })
+
+  // Note this has to be typed if you are using TS
+  return { creationTime: new Date() }
+}
+
+const myPlugin: Plugin = ({ $pinia }) => {
+  $pinia.use(MyPiniaPlugin)
+}
+
+export default myPlugin
+```

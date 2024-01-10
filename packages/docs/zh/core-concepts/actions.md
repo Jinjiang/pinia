@@ -2,7 +2,7 @@
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/synchronous-and-asynchronous-actions-in-pinia"
-  title="Learn all about actions in Pinia"
+  title="学习 Pinia 中关于 action 的一切"
 />
 
 Action 相当于组件中的 [method](https://v3.vuejs.org/guide/data-methods.html#methods)。它们可以通过 `defineStore()` 中的 `actions` 属性来定义，**并且它们也是定义业务逻辑的完美选择。**
@@ -96,7 +96,7 @@ export const useSettingsStore = defineStore('settings', {
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-pinia-actions-in-the-options-api"
-  title="Access Pinia Getters via the Options API"
+  title="通过选项式 API 访问 Pinia getter"
 />
 
 在下面的例子中，你可以假设相关的 store 已经创建了：

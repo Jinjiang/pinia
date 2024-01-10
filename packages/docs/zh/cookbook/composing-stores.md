@@ -40,7 +40,7 @@ const useY = defineStore('y', () => {
 })
 ```
 
-## 嵌套 store %{#nested-stores}%
+## 嵌套 Store %{#nested-stores}%
 
 注意，如果一个 store 使用另一个 store，你可以直接导入并在 *actions* 和 *getters* 中调用 `useStore()` 函数。然后你就可以像在 Vue 组件中那样使用 store。参考[共享 Getter](#shared-getters) 和[共享 Action](#shared-actions)。
 
@@ -84,7 +84,7 @@ export const useCartStore = defineStore('cart', {
 })
 ```
 
-## 共享 Actions %{#shared-actions}%
+## 共享 Action %{#shared-actions}%
 
 *actions* 也一样：
 
@@ -100,6 +100,34 @@ export const useCartStore = defineStore('cart', {
       try {
         await apiOrderCart(user.token, this.items)
         // 其他 action
+        this.emptyCart()
+      } catch (err) {
+        displayError(err)
+      }
+    },
+  },
+})
+```
+
+<!-- TODO: translation -->
+
+Since actions can be asynchronous, make sure **all of your `useStore()` calls appear before any `await`**. Otherwise, this could lead to using the wrong pinia instance _in SSR apps_:
+
+```js{7-8,11-13}
+import { defineStore } from 'pinia'
+import { useUserStore } from './user'
+
+export const useCartStore = defineStore('cart', {
+  actions: {
+    async orderCart() {
+      // ✅ call at the top of the action before any `await`
+      const user = useUserStore()
+
+      try {
+        await apiOrderCart(user.token, this.items)
+        // ❌ called after an `await` statement
+        const otherStore = useOtherStore()
+        // another action
         this.emptyCart()
       } catch (err) {
         displayError(err)
