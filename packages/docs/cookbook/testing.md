@@ -1,4 +1,4 @@
-# Testing stores
+# Testing stores %{#testing-stores}%
 
 Stores will, by design, be used at many places and can make testing much harder than it should be. Fortunately, this doesn't have to be the case. We need to take care of three things when testing stores:
 
@@ -8,7 +8,7 @@ Stores will, by design, be used at many places and can make testing much harder 
 
 Depending on what or how you are testing, we need to take care of these three things differently.
 
-## Unit testing a store
+## Unit testing a store %{#unit-testing-a-store}%
 
 To unit test a store, the most important part is creating a `pinia` instance:
 
@@ -58,7 +58,7 @@ beforeEach(() => {
 })
 ```
 
-## Unit testing components
+## Unit testing components %{#unit-testing-components}%
 
 This can be achieved with `createTestingPinia()`, which returns a pinia instance designed to help unit tests components.
 
@@ -100,7 +100,7 @@ expect(store.someAction).toHaveBeenLastCalledWith()
 
 Please note that if you are using Vue 2, `@vue/test-utils` requires a [slightly different configuration](#Unit-test-components-Vue-2-).
 
-### Initial State
+### Initial State %{#initial-state}%
 
 You can set the initial state of **all of your stores** when creating a testing pinia by passing an `initialState` object. This object will be used by the testing pinia to _patch_ stores when they are created. Let's say you want to initialize the state of this store:
 
@@ -133,7 +133,7 @@ const store = useSomeStore() // uses the testing pinia!
 store.n // 20
 ```
 
-### Customizing behavior of actions
+### Customizing behavior of actions %{#customizing-behavior-of-actions}%
 
 `createTestingPinia` stubs out all store actions unless told otherwise. This allows you to test your components and stores separately.
 
@@ -155,7 +155,7 @@ store.someAction()
 expect(store.someAction).toHaveBeenCalledTimes(1)
 ```
 
-### Specifying the createSpy function
+### Specifying the createSpy function %{#specifying-the-createspy-function}%
 
 When using Jest, or vitest with `globals: true`, `createTestingPinia` automatically stubs actions using the spy function based on the existing test framework (`jest.fn` or `vitest.fn`). If you are not using `globals: true` or using a different framework, you'll need to provide a [createSpy](/api/interfaces/pinia_testing.TestingOptions.html#createspy) option:
 
@@ -182,7 +182,7 @@ createTestingPinia({
 
 You can find more examples in [the tests of the testing package](https://github.com/vuejs/pinia/blob/v2/packages/testing/src/testing.spec.ts).
 
-### Mocking getters
+### Mocking getters %{#mocking-getters}%
 
 By default, any getter will be computed like regular usage but you can manually force a value by setting the getter to anything you want:
 
@@ -208,7 +208,7 @@ counter.double = undefined
 counter.double // 2 (=1 x 2)
 ```
 
-### Pinia Plugins
+### Pinia Plugins %{#pinia-plugins}%
 
 If you have any pinia plugins, make sure to pass them when calling `createTestingPinia()` so they are properly applied. **Do not add them with `testingPinia.use(MyPlugin)`** like you would do with a regular pinia:
 
@@ -229,11 +229,11 @@ const wrapper = mount(Counter, {
 })
 ```
 
-## E2E tests
+## E2E tests %{#e2e-tests}%
 
 When it comes to Pinia, you don't need to change anything for E2E tests, that's the whole point of these tests! You could maybe test HTTP requests, but that's way beyond the scope of this guide 😄.
 
-## Unit test components (Vue 2)
+## Unit test components (Vue 2) %{#unit-test-components-vue-2}%
 
 When using [Vue Test Utils 1](https://v1.test-utils.vuejs.org/), install Pinia on a `localVue`:
 

@@ -1,4 +1,4 @@
-# Composing Stores
+# Composing Stores %{#composing-stores}%
 
 Composing stores is about having stores that use each other, and this is supported in Pinia. There is one rule to follow:
 
@@ -40,7 +40,7 @@ const useY = defineStore('y', () => {
 })
 ```
 
-## Nested Stores
+## Nested Stores %{#nested-stores}%
 
 Note that if one store uses another store, you can directly import and call the `useStore()` function within _actions_ and _getters_. Then you can interact with the store just like you would from within a Vue component. See [Shared Getters](#shared-getters) and [Shared Actions](#shared-actions).
 
@@ -65,7 +65,7 @@ export const useCartStore = defineStore('cart', () => {
 })
 ```
 
-## Shared Getters
+## Shared Getters %{#shared-getters}%
 
 You can simply call `useOtherStore()` inside a _getter_:
 
@@ -84,7 +84,7 @@ export const useCartStore = defineStore('cart', {
 })
 ```
 
-## Shared Actions
+## Shared Actions %{#shared-actions}%
 
 The same applies to _actions_:
 

@@ -1,12 +1,12 @@
-# Migrating from Vuex ≤4
+# Migrating from Vuex ≤4 %{#migrating-from-vuex-≤4}%
 
 Although the structure of Vuex and Pinia stores is different, a lot of the logic can be reused. This guide serves to help you through the process and point out some common gotchas that can appear.
 
-## Preparation
+## Preparation %{#preparation}%
 
 First, follow the [Getting Started guide](../getting-started.md) to install Pinia.
 
-## Restructuring Modules to Stores
+## Restructuring Modules to Stores %{#restructuring-modules-to-stores}%
 
 Vuex has the concept of a single store with multiple _modules_. These modules can optionally be namespaced and even nested within each other.
 
@@ -42,7 +42,7 @@ The directory for Pinia is generally called `stores` instead of `store`. This is
 
 For large projects you may wish to do this conversion module by module rather than converting everything at once. You can actually mix Pinia and Vuex together during the migration so this approach can also work and is another reason for naming the Pinia directory `stores` instead.
 
-## Converting a Single Module
+## Converting a Single Module %{#converting-a-single-module}%
 
 Here is a complete example of the before and after of converting a Vuex module to a Pinia store, see below for a step-by-step guide. The Pinia example uses an option store as the structure is most similar to Vuex:
 
@@ -190,7 +190,7 @@ Let's break the above down into steps:
 
 As you can see most of your code can be reused. Type safety should also help you identify what needs to be changed if anything is missed.
 
-## Usage Inside Components
+## Usage Inside Components %{#usage-inside-components}%
 
 Now that your Vuex module has been converted to a Pinia store, any component or other file that uses that module needs to be updated too.
 
@@ -240,7 +240,7 @@ export default defineComponent({
 })
 ```
 
-## Usage Outside Components
+## Usage Outside Components %{#usage-outside-components}%
 
 Updating usage outside of components should be simple as long as you're careful to _not use a store outside of functions_. Here is an example of using the store in a Vue Router navigation guard:
 
@@ -268,19 +268,19 @@ router.beforeEach((to, from, next) => {
 
 More details can be found [here](../core-concepts/outside-component-usage.md).
 
-## Advanced Vuex Usage
+## Advanced Vuex Usage %{#advanced-vuex-usage}%
 
 In the case your Vuex store using some of the more advanced features it offers, here is some guidance on how to accomplish the same in Pinia. Some of these points are already covered in [this comparison summary](../introduction.md#Comparison-with-Vuex-3-x-4-x).
 
-### Dynamic Modules
+### Dynamic Modules %{#dynamic-modules}%
 
 There is no need to dynamically register modules in Pinia. Stores are dynamic by design and are only registered when they are needed. If a store is never used, it will never be "registered".
 
-### Hot Module Replacement
+### Hot Module Replacement %{#hot-module-replacement}%
 
 HMR is also supported but will need to be replaced, see the [HMR Guide](./hot-module-replacement.md).
 
-### Plugins
+### Plugins %{#plugins}%
 
 If you use a public Vuex plugin then check if there is a Pinia alternative. If not you will need to write your own or evaluate whether the plugin is still necessary.
 

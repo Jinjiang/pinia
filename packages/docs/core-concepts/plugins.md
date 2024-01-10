@@ -1,4 +1,4 @@
-# Plugins
+# Plugins %{#plugins}%
 
 Pinia stores can be fully extended thanks to a low level API. Here is a list of things you can do:
 
@@ -32,7 +32,7 @@ store.secret // 'the cake is a lie'
 
 This is useful to add global objects like the router, modal, or toast managers.
 
-## Introduction
+## Introduction %{#introduction}%
 
 A Pinia plugin is a function that optionally returns properties to be added to a store. It takes one optional argument, a _context_:
 
@@ -54,7 +54,7 @@ pinia.use(myPiniaPlugin)
 
 Plugins are only applied to stores created **after the plugins themselves, and after `pinia` is passed to the app**, otherwise they won't be applied.
 
-## Augmenting a Store
+## Augmenting a Store %{#augmenting-a-store}%
 
 You can add properties to every store by simply returning an object of them in a plugin:
 
@@ -102,7 +102,7 @@ pinia.use(({ store }) => {
 
 This is why you can access all computed properties without `.value` and why they are reactive.
 
-### Adding new state
+### Adding new state %{#adding-new-state}%
 
 If you want to add new state properties to a store or properties that are meant to be used during hydration, **you will have to add it in two places**:
 
@@ -160,7 +160,7 @@ pinia.use(({ store }) => {
 
 :::
 
-#### Resetting state added in plugins
+#### Resetting state added in plugins %{#resetting-state-added-in-plugins}%
 
 By default, `$reset()` will not reset state added by plugins but you can override it to also reset the state you add:
 
@@ -188,7 +188,7 @@ pinia.use(({ store }) => {
 })
 ```
 
-## Adding new external properties
+## Adding new external properties %{#adding-new-external-properties}%
 
 When adding external properties, class instances that come from other libraries, or simply things that are not reactive, you should wrap the object with `markRaw()` before passing it to pinia. Here is an example adding the router to every store:
 
@@ -202,7 +202,7 @@ pinia.use(({ store }) => {
 })
 ```
 
-## Calling `$subscribe` inside plugins
+## Calling `$subscribe` inside plugins %{#calling-subscribe-inside-plugins}%
 
 You can use [store.$subscribe](./state.md#subscribing-to-the-state) and [store.$onAction](./actions.md#subscribing-to-actions) inside plugins too:
 
@@ -217,7 +217,7 @@ pinia.use(({ store }) => {
 })
 ```
 
-## Adding new options
+## Adding new options %{#adding-new-options}%
 
 It is possible to create new options when defining stores to later on consume them from plugins. For example, you could create a `debounce` option that allows you to debounce any action:
 
@@ -275,11 +275,11 @@ defineStore(
 )
 ```
 
-## TypeScript
+## TypeScript %{#typescript}%
 
 Everything shown above can be done with typing support, so you don't ever need to use `any` or `@ts-ignore`.
 
-### Typing plugins
+### Typing plugins %{#typing-plugins}%
 
 A Pinia plugin can be typed as follows:
 
@@ -291,7 +291,7 @@ export function myPiniaPlugin(context: PiniaPluginContext) {
 }
 ```
 
-### Typing new store properties
+### Typing new store properties %{#typing-new-store-properties}%
 
 When adding new properties to stores, you should also extend the `PiniaCustomProperties` interface.
 
@@ -360,7 +360,7 @@ When extending types in generics, they must be named **exactly as in the source 
 
 :::
 
-### Typing new state
+### Typing new state %{#typing-new-state}%
 
 When adding new state properties (to both, the `store` and `store.$state`), you need to add the type to `PiniaCustomStateProperties` instead. Differently from `PiniaCustomProperties`, it only receives the `State` generic:
 
@@ -374,7 +374,7 @@ declare module 'pinia' {
 }
 ```
 
-### Typing new creation options
+### Typing new creation options %{#typing-new-creation-options}%
 
 When creating new options for `defineStore()`, you should extend the `DefineStoreOptionsBase`. Differently from `PiniaCustomProperties`, it only exposes two generics: the State and the Store type, allowing you to limit what can be defined. For example, you can use the names of the actions:
 
@@ -393,7 +393,7 @@ declare module 'pinia' {
 There is also a `StoreGetters` type to extract the _getters_ from a Store type. You can also extend the options of _setup stores_ or _option stores_ **only** by extending the types `DefineStoreOptions` and `DefineSetupStoreOptions` respectively.
 :::
 
-## Nuxt.js
+## Nuxt.js %{#nuxt-js}%
 
 When [using pinia alongside Nuxt](../ssr/nuxt.md), you will have to create a [Nuxt plugin](https://nuxt.com/docs/guide/directory-structure/plugins) first. This will give you access to the `pinia` instance:
 
@@ -418,7 +418,7 @@ export default defineNuxtPlugin(({ $pinia }) => {
 
 Note the above example is using TypeScript, you have to remove the type annotations `PiniaPluginContext` and `Plugin` as well as their imports if you are using a `.js` file.
 
-### Nuxt.js 2
+### Nuxt.js 2 %{#nuxt-2}%
 
 If you are using Nuxt.js 2, the types are slightly different:
 

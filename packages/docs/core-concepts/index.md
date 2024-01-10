@@ -1,4 +1,4 @@
-# Defining a Store
+# Defining a Store %{#defining-a-store}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/define-your-first-pinia-store"
@@ -23,7 +23,7 @@ This _name_, also referred to as _id_, is necessary and is used by Pinia to conn
 
 `defineStore()` accepts two distinct values for its second argument: a Setup function or an Options object.
 
-## Option Stores
+## Option Stores %{#option-stores}%
 
 Similar to Vue's Options API, we can also pass an Options Object with `state`, `actions`, and `getters` properties.
 
@@ -45,7 +45,7 @@ You can think of `state` as the `data` of the store, `getters` as the `computed`
 
 Option stores should feel intuitive and simple to get started with.
 
-## Setup Stores
+## Setup Stores %{#setup-stores}%
 
 There is also another possible syntax to define stores. Similar to the Vue Composition API's [setup function](https://vuejs.org/api/composition-api-setup.html), we can pass in a function that defines reactive properties and methods and returns an object with the properties and methods we want to expose.
 
@@ -95,11 +95,11 @@ export const useSearchFilters = defineStore('search-filters', () => {
 Do not return properties like `route` or `appProvided` (from the example above) as they do not belong to the store itself and you can directly access them within components with `useRoute()` and `inject('appProvided')`.
 :::
 
-## What syntax should I pick?
+## What syntax should I pick? %{#what-syntax-should-i-pick}%
 
 As with [Vue's Composition API and Options API](https://vuejs.org/guide/introduction.html#which-to-choose), pick the one that you feel the most comfortable with. If you're not sure, try [Option Stores](#option-stores) first.
 
-## Using the store
+## Using the store %{#using-the-store}%
 
 We are _defining_ a store because the store won't be created until `use...Store()` is called within a component `<script setup>` (or within `setup()` **like all composables**):
 
@@ -142,7 +142,7 @@ const doubleValue = computed(() => store.doubleCount)
 </script>
 ```
 
-## Destructuring from a Store
+## Destructuring from a Store %{#destructuring-from-a-store}%
 
 In order to extract properties from the store while keeping its reactivity, you need to use `storeToRefs()`. It will create refs for every reactive property. This is useful when you are only using state from the store but not calling any action. Note you can destructure actions directly from the store as they are bound to the store itself too:
 

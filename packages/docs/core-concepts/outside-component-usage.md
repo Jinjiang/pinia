@@ -1,10 +1,10 @@
-# Using a store outside of a component
+# Using a store outside of a component %{#using-a-store-outside-of-a-component}%
 
 Pinia stores rely on the `pinia` instance to share the same store instance across all calls. Most of the time, this works out of the box by just calling your `useStore()` function. For example, in `setup()`, you don't need to do anything else. But things are a bit different outside of a component.
 Behind the scenes, `useStore()` _injects_ the `pinia` instance you gave to your `app`. This means that if the `pinia` instance cannot be automatically injected, you have to manually provide it to the `useStore()` function.
 You can solve this differently depending on the kind of application you are writing.
 
-## Single Page Applications
+## Single Page Applications %{#single-page-applications}%
 
 If you are not doing any SSR (Server Side Rendering), any call of `useStore()` after installing the pinia plugin with `app.use(pinia)` will work:
 

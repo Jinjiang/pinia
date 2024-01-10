@@ -1,4 +1,4 @@
-# Usage without `setup()`
+# Usage without `setup()` %{#usage-without-setup}%
 
 Pinia can be used even if you are not using the composition API (if you are using Vue <2.7, you still need to install the `@vue/composition-api` plugin though). While we recommend you give the Composition API a try and learn it, it might not be the time for you and your team yet, you might be in the process of migrating an application, or any other reason. There are a few functions:
 
@@ -8,7 +8,7 @@ Pinia can be used even if you are not using the composition API (if you are usin
 - ⚠️ [mapGetters](../core-concepts/getters.md#without-setup) (just for migration convenience, use `mapState()` instead)
 - [mapActions](../core-concepts/actions.md#without-setup)
 
-## Giving access to the whole store
+## Giving access to the whole store %{#giving-access-to-the-whole-store}%
 
 If you need to access pretty much everything from the store, it might be too much to map every single property of the store... Instead you can get access to the whole store with `mapStores()`:
 
@@ -54,7 +54,7 @@ setMapStoreSuffix('_store')
 export const pinia = createPinia()
 ```
 
-## TypeScript
+## TypeScript %{#typescript}%
 
 By default, all map helpers support autocompletion and you don't need to do anything. If you call `setMapStoreSuffix()` to change the `"Store"` suffix, you will need to also add it somewhere in a TS file or your `global.d.ts` file. The most convenient place would be the same place where you call `setMapStoreSuffix()`:
 

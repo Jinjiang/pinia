@@ -1,4 +1,4 @@
-# State
+# State %{#state}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-state-from-a-pinia-store"
@@ -29,7 +29,7 @@ export const useStore = defineStore('storeId', {
 If you are using Vue 2, the data you create in `state` follows the same rules as the `data` in a Vue instance, i.e. the state object must be plain and you need to call `Vue.set()` when **adding new** properties to it. **See also: [Vue#data](https://v2.vuejs.org/v2/api/#data)**.
 :::
 
-## TypeScript
+## TypeScript %{#typescript}%
 
 You don't need to do much in order to make your state compatible with TS: make sure [`strict`](https://www.typescriptlang.org/tsconfig#strict), or at the very least, [`noImplicitThis`](https://www.typescriptlang.org/tsconfig#noImplicitThis), are enabled and Pinia will infer the type of your state automatically! However, there are a few cases where you should give it a hand with some casting:
 
@@ -74,7 +74,7 @@ interface UserInfo {
 }
 ```
 
-## Accessing the `state`
+## Accessing the `state` %{#accessing-the-state}%
 
 By default, you can directly read and write to the state by accessing it through the `store` instance:
 
@@ -86,7 +86,7 @@ store.count++
 
 Note you cannot add a new state property **if you don't define it in `state()`**, it must contain the initial state. e.g.: we can't do `store.secondCount = 2` if `secondCount` is not defined in `state()`.
 
-## Resetting the state
+## Resetting the state %{#resetting-the-state}%
 
 In [Option Stores](/core-concepts/index.md#option-stores), you can _reset_ the state to its initial value by calling the `$reset()` method on the store:
 
@@ -112,7 +112,7 @@ export const useCounterStore = defineStore('counter', () => {
 })
 ```
 
-### Usage with the Options API
+### Usage with the Options API %{#usage-with-the-options-api}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-pinia-state-in-the-options-api"
@@ -159,7 +159,7 @@ export default {
 }
 ```
 
-#### Modifiable state
+#### Modifiable state %{#modifiable-state}%
 
 If you want to be able to write to these state properties (e.g. if you have a form), you can use `mapWritableState()` instead. Note you cannot pass a function like with `mapState()`:
 
@@ -185,7 +185,7 @@ export default {
 You don't need `mapWritableState()` for collections like arrays unless you are replacing the whole array with `cartItems = []`, `mapState()` still allows you to call methods on your collections.
 :::
 
-## Mutating the state
+## Mutating the state %{#mutating-the-state}%
 
 <!-- TODO: disable this with `strictMode` -->
 
@@ -212,7 +212,7 @@ store.$patch((state) => {
 
 The main difference here is that `$patch()` allows you to group multiple changes into one single entry in the devtools. Note **both, direct changes to `state` and `$patch()` appear in the devtools** and can be time traveled (not yet in Vue 3).
 
-## Replacing the `state`
+## Replacing the `state` %{#replacing-the-state}%
 
 You **cannot exactly replace** the state of a store as that would break reactivity. You can however _patch it_:
 
@@ -229,7 +229,7 @@ You can also **set the initial state** of your whole application by changing the
 pinia.state.value = {}
 ```
 
-## Subscribing to the state
+## Subscribing to the state %{#subscribing-to-the-state}%
 
 You can watch the state and its changes through the `$subscribe()` method of a store, similar to Vuex's [subscribe method](https://vuex.vuejs.org/api/#subscribe). The advantage of using `$subscribe()` over a regular `watch()` is that _subscriptions_ will trigger only once after _patches_ (e.g. when using the function version from above).
 

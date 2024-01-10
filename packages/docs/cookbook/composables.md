@@ -1,8 +1,8 @@
-# Dealing with Composables
+# Dealing with Composables %{#dealing-with-composables}%
 
 [Composables](https://vuejs.org/guide/reusability/composables.html#composables) are functions that leverage Vue Composition API to encapsulate and reuse stateful logic. Whether you write your own, you use [external libraries](https://vueuse.org/) or do both, you can fully use the power of Composables in your pinia stores.
 
-## Option Stores
+## Option Stores %{#option-stores}%
 
 When defining an option store, you can call a composable inside of the `state` property:
 
@@ -25,7 +25,7 @@ Here are some examples of composables that cannot be used in an option stores (b
 - [useMemoryInfo](https://vueuse.org/core/useMemory/): exposes readonly data
 - [useEyeDropper](https://vueuse.org/core/useEyeDropper/): exposes readonly data and functions
 
-## Setup Stores
+## Setup Stores %{#setup-stores}%
 
 On the other hand, when defining a setup store, you can use almost any composable since every property gets discerned into state, action, or getter:
 
@@ -61,7 +61,7 @@ export const useVideoPlayer = defineStore('video', () => {
 Differently from regular state, `ref<HTMLVideoElement>()` contains a non-serializable reference to the DOM element. This is why we don't return it directly. Since it's client-only state, we know it won't be set on the server and will **always** start as `undefined` on the client.
 :::
 
-## SSR
+## SSR %{#ssr}%
 
 When dealing with [Server Side Rendering](../ssr/index.md), you need to take care of some extra steps in order to use composables within your stores.
 

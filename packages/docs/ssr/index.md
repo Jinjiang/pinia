@@ -1,4 +1,4 @@
-# Server Side Rendering (SSR)
+# Server Side Rendering (SSR) %{#server-side-rendering-ssr}%
 
 :::tip
 If you are using **Nuxt.js,** you need to read [**these instructions**](./nuxt.md) instead.
@@ -14,7 +14,7 @@ const main = useMainStore()
 </script>
 ```
 
-## Using the store outside of `setup()`
+## Using the store outside of `setup()` %{#using-the-store-outside-of-setup}%
 
 If you need to use the store somewhere else, you need to pass the `pinia` instance [that was passed to the app](../getting-started.md#installation) to the `useStore()` function call:
 
@@ -56,7 +56,7 @@ onServerPrefetch(async () => {
 </script>
 ```
 
-## State hydration
+## State hydration %{#state-hydration}%
 
 To hydrate the initial state, you need to make sure the rootState is included somewhere in the HTML for Pinia to pick it up later on. Depending on what you are using for SSR, **you should escape the state for security reasons**. We recommend using [@nuxt/devalue](https://github.com/nuxt-contrib/devalue) which is the one used by Nuxt.js:
 

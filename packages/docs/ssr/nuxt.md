@@ -1,8 +1,8 @@
-# Nuxt.js
+# Nuxt.js %{#nuxt-js}%
 
 Using Pinia with [Nuxt](https://nuxt.com/) is easier since Nuxt takes care of a lot of things when it comes to _server side rendering_. For instance, **you don't need to care about serialization nor XSS attacks**. Pinia supports Nuxt Bridge and Nuxt 3. For bare Nuxt 2 support, [see below](#nuxt-2-without-bridge).
 
-## Installation
+## Installation %{#installation}%
 
 ```bash
 yarn add pinia @pinia/nuxt
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
 
 And that's it, use your store as usual!
 
-## Awaiting for actions in pages
+## Awaiting for actions in pages %{#awaiting-for-actions-in-pages}%
 
 As with `onServerPrefetch()`, you can call a store action within `asyncData()`. Given how `useAsyncData()` works, **make sure to return a value**. This will allow Nuxt to skip running the action on the client side and reuse the value from the server.
 
@@ -73,7 +73,7 @@ export default {
 
 :::
 
-## Auto imports
+## Auto imports %{#auto-imports}%
 
 By default `@pinia/nuxt` exposes a few auto imports:
 
@@ -97,7 +97,7 @@ export default defineNuxtConfig({
 
 Note the folders are relative to the root of your project. If you change the `srcDir` option, you need to adapt the paths accordingly.
 
-## Nuxt 2 without bridge
+## Nuxt 2 without bridge %{#nuxt-2-without-bridge}%
 
 Pinia supports Nuxt 2 until `@pinia/nuxt` v0.2.1. Make sure to also install [`@nuxtjs/composition-api`](https://composition-api.nuxtjs.org/) alongside `pinia`:
 
@@ -122,7 +122,7 @@ export default {
 }
 ```
 
-### TypeScript
+### TypeScript %{#typescript}%
 
 If you are using Nuxt 2 (`@pinia/nuxt` < 0.3.0) with TypeScript or have a `jsconfig.json`, you should also add the types for `context.pinia`:
 
@@ -137,7 +137,7 @@ If you are using Nuxt 2 (`@pinia/nuxt` < 0.3.0) with TypeScript or have a `jscon
 
 This will also ensure you have autocompletion 😉 .
 
-### Using Pinia alongside Vuex
+### Using Pinia alongside Vuex %{#using-pinia-alongside-vuex}%
 
 It is recommended to **avoid using both Pinia and Vuex** but if you need to use both, you need to tell pinia to not disable it:
 

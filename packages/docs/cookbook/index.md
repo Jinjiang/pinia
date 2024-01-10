@@ -1,4 +1,4 @@
-# Cookbook
+# Cookbook %{#cookbook}%
 
 - [Migrating from Vuex ≤4](./migration-vuex.md): A migration guide for converting Vuex ≤4 projects.
 - [HMR](./hot-module-replacement.md): How to activate hot module replacement and improve the developer experience.

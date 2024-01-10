@@ -1,4 +1,4 @@
-# VS Code Snippets
+# VS Code Snippets %{#vs-code-snippets}%
 
 These are some snippets that I use in VS Code to make my life easier.
 

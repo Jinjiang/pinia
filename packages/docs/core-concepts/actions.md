@@ -1,4 +1,4 @@
-# Actions
+# Actions %{#actions}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/synchronous-and-asynchronous-actions-in-pinia"
@@ -69,7 +69,7 @@ store.randomizeCounter()
 </template>
 ```
 
-## Accessing other stores actions
+## Accessing other stores actions %{#accessing-other-stores-actions}%
 
 To use another store, you can directly _use it_ inside of the _action_:
 
@@ -94,7 +94,7 @@ export const useSettingsStore = defineStore('settings', {
 })
 ```
 
-## Usage with the Options API
+## Usage with the Options API %{#usage-with-the-options-api}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-pinia-actions-in-the-options-api"
@@ -121,7 +121,7 @@ export const useCounterStore = defineStore('counter', {
 })
 ```
 
-### With `setup()`
+### With `setup()` %{#with-setup}%
 
 While Composition API is not for everyone, the `setup()` hook can make using Pinia easier to work within the Options API. No extra map helper functions needed!
 
@@ -145,7 +145,7 @@ export default defineComponent({
 </script>
 ```
 
-### Without `setup()`
+### Without `setup()` %{#without-setup}%
 
 If you would prefer not to use Composition API at all, you can use the `mapActions()` helper to map actions properties as methods in your component:
 
@@ -164,7 +164,7 @@ export default {
 }
 ```
 
-## Subscribing to actions
+## Subscribing to actions %{#subscribing-to-actions}%
 
 It is possible to observe actions and their outcome with `store.$onAction()`. The callback passed to it is executed before the action itself. `after` handles promises and allows you to execute a function after the action resolves. In a similar way, `onError` allows you to execute a function if the action throws or rejects. These are useful for tracking errors at runtime, similar to [this tip in the Vue docs](https://vuejs.org/guide/best-practices/production-deployment#tracking-runtime-errors).
 

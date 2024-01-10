@@ -1,4 +1,4 @@
-# Getters
+# Getters %{#getters}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/getters-in-pinia"
@@ -53,7 +53,7 @@ const store = useCounterStore()
 </template>
 ```
 
-## Accessing other getters
+## Accessing other getters %{#accessing-other-getters}%
 
 As with computed properties, you can combine multiple getters. Access any other getter via `this`. Even if you are not using TypeScript, you can hint your IDE for types with the [JSDoc](https://jsdoc.app/tags-returns.html):
 
@@ -80,7 +80,7 @@ export const useCounterStore = defineStore('counter', {
 })
 ```
 
-## Passing arguments to getters
+## Passing arguments to getters %{#passing-arguments-to-getters}%
 
 _Getters_ are just _computed_ properties behind the scenes, so it's not possible to pass any parameters to them. However, you can return a function from the _getter_ to accept any arguments:
 
@@ -125,7 +125,7 @@ export const useStore = defineStore('main', {
 })
 ```
 
-## Accessing other stores getters
+## Accessing other stores getters %{#accessing-other-stores-getters}%
 
 To use another store getters, you can directly _use it_ inside of the _getter_:
 
@@ -145,7 +145,7 @@ export const useStore = defineStore('main', {
 })
 ```
 
-## Usage with `setup()`
+## Usage with `setup()` %{#usage-with-setup}%
 
 You can directly access any getter as a property of the store (exactly like state properties):
 
@@ -158,7 +158,7 @@ store.doubleCount // 6
 </script>
 ```
 
-## Usage with the Options API
+## Usage with the Options API %{#usage-with-the-options-api}%
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/access-pinia-getters-in-the-options-api"
@@ -185,7 +185,7 @@ export const useCounterStore = defineStore('counter', {
 })
 ```
 
-### With `setup()`
+### With `setup()` %{#with-setup}%
 
 While Composition API is not for everyone, the `setup()` hook can make using Pinia easier to work with in the Options API. No extra map helper functions needed!
 
@@ -211,7 +211,7 @@ export default defineComponent({
 
 This is useful while migrating a component from the Options API to the Composition API but **should only be a migration step**, always try not to mix both API styles within the same component.
 
-### Without `setup()`
+### Without `setup()` %{#without-setup}%
 
 You can use the same `mapState()` function used in the [previous section of state](./state.md#options-api) to map to getters:
 
